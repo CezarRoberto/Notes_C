@@ -1,0 +1,39 @@
+#include <stdio.h>
+/*
+O bubble sort, ou ordenação por flutuação (literalmente "por bolha"), é um algoritmo de ordenação dos mais simples. A ideia é percorrer o vector diversas vezes, e a cada passagem fazer flutuar para o topo o maior elemento da sequência. Essa movimentação lembra a forma como as bolhas em um tanque de água procuram seu próprio nível, e disso vem o nome do algoritmo.
+*/
+
+void bubbleSort(); //Função para ordenar os valores
+void Show(); // Função para mostrar os valores
+
+int main(void) {
+  int n=5;
+  int v[] = {5,10,2,8,3,4};
+  Show(v,n); // Chamando a função antes da ordenação
+  bubbleSort(v,n); // Ordenação utilizando o bubbleSort
+  Show(v,n); // Chamando a função depois da ordenação
+  return 0;
+  }
+
+
+    void Show(int *v,int n){     // Função para percorrer e printar os elementos do vetor
+      int i;
+        printf("\n");
+        for(i=0; i<n; i++) {     // Percorrer
+          printf("%d, ", v[i]);
+        }
+        printf("\n");
+    }
+
+    void bubbleSort(int *v, int n){
+      int j,i;                   // variaveis auxiliares
+      for (i=1;i<n; i++){        // Responsavel pelas fases
+        for(j=0;j<n-i; j++){     // Percorrer todo o vetor
+          if(v[j] > v[j+1]) {    // Verificando se o elemento anterior passado em J é maior que o proximo elemento
+              int x = v[j];      // Variavel temporaria para realocar os valores
+              v[j] = v[j+1];     // troca do valor percorrido pelo proximo valor, se encotra-se no '' if ''
+              v[j+1] = x;        // troca dos valores
+        }
+      }
+    }
+  }
