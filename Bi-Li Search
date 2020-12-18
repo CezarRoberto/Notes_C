@@ -1,0 +1,87 @@
+#include <stdio.h>    // Chamando bibliotecas
+#include <stdlib.h>
+
+int buscaLinear (int v[], int x, int n);  // Chamando a função buscaLinear
+int buscaBinaria (int v[], int x, int n); // Chamando a função buscaBinaria
+void imprimir(int v[], int n);   // chamando a função para imprimir o valor pesquisado
+void bolha(int v[], int n);  // chamando a função bolha para organizar os valores 
+
+int main () {
+	int v[] = {3,10,8,4,7,13,6,9};  // vetores a serem analizados
+    int v2[] = {13,7,6,10,9,3,5,4};
+	int n=8; // tamanho da bolha
+
+	int x=14;
+	printf("linear: \n");
+	if (buscaLinear(v,x,n)) {  // verificação da busacaLinear, se o número estiver no array, ele é retornado
+		printf("numero encontrado!\n");
+	} else {
+		printf("numero nao encontrado!\n");
+	}
+
+	bolha(v2,n);   // Organização do array
+	printf("bolha: ");
+	imprimir(v2,n);   // Imprimir o araay
+
+    printf("\nDigite o valor a ser procurado usando a busca binaria: "); // Input 
+    scanf("%d",&x);
+    int posicao = buscaBinaria(v2,x,n);
+
+    if(posicao!=-1) {
+        printf("\nO elemento %d foi encontrado na posição %d do vetor!", v2[posicao], (posicao+1));  // Verificação da buscaBinaria para printar na tela
+    } else {
+        printf("\nO elemento procurado não existe!");
+    }
+
+	return 0;
+}
+
+int buscaLinear (int v[], int x, int n){ // Vetor/elemento a ser procurado/Tamanho
+	int i; // variavel auxilar
+	for(i=0;i<n;i++) {  // Laço de repetição que percorre o vetor V, com o tamanho N
+		if (v[i]==x) {    // Se o valor for o mesmo que encontra-se no vetor
+			return 1; // retorna a função
+		}
+	}
+	return 0;  // não retorna a função se não encontrar o valor
+}
+
+int buscaBinaria (int v[], int x, int n){
+	int inf, sup, m; // inferior, superior e central para ajudar na busca
+	inf=0;
+	sup=n-1;
+
+	while (inf <= sup) {               // A busca binaria dar se por selecionar um elemento
+	    m=(inf+sup)/2;                 // e comparar com o elemento central, se ele for ma
+		if (x==v[m]) {                   // ior, o elemento central acrescenta 1, se for me
+			return m;                      //nor, ele diminui 
+		} else if (x > v[m]) {
+			inf = m+1;
+		} else {                         // Vale lembrar que só funciona se o array estiver                                      organizado   
+			sup = m-1;
+		}
+	}
+	return -1;
+}
+
+void imprimir(int v[], int n) { // Função responsavel por passar todos os valores de v e                                    printar 
+    int i; // Variavel auxiliar
+    printf("\n");
+    for(i=0; i<n; i++) {
+        printf("%d, ", v[i]);
+    }
+    printf("\n");
+}
+
+void bolha(int v[], int n) {  // Função bubbleSort para organizar os valores, ela é dada por valores passados dentro da função que são comparados com o proximo elemento do array, e modificando-os se satisfazer os " ifs ", nesse caso, se o número posterior é maior que o anterior, então eles trocam de posição
+    int i, j;
+    for(i=1; i<n; i++) {
+        for(j=0; j<n-i; j++) {
+            if( v[j]>v[j+1] ) {
+                int x = v[j];
+                v[j] = v[j+1];
+                v[j+1] = x;
+            }
+        }
+    }
+}
